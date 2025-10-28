@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(120deg, #1f1c2c, #928dab);
+    overflow: hidden;
+  }
+
+  /* Animated background circles */
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: move 10s infinite ease-in-out alternate;
+  }
+
+  .circle:nth-child(1) {
+    width: 150px;
+    height: 150px;
+    background: #00e6ff;
+    top: 10%;
+    left: 15%;
+    animation-delay: 0s;
+  }
+
+  .circle:nth-child(2) {
+    width: 250px;
+    height: 250px;
+    background: #0072ff;
+    bottom: 10%;
+    right: 10%;
+    animation-delay: 2s;
+  }
+
+  .circle:nth-child(3) {
+    width: 100px;
+    height: 100px;
+    background: #00bfff;
+    top: 70%;
+    left: 70%;
+    animation-delay: 4s;
+  }
+
+  @keyframes move {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-30px) scale(1.1); }
+  }
+
+  /* Main Form Container */
+  .form-container {
+    position: relative;
+    background: rgba(255,255,255,0.15);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
+    width: 340px;
+    text-align: center;
+    color: #fff;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(60px);
+    animation: fadeUp 1s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .input-group {
+    position: relative;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .input-group label {
+    display: block;
+    font-size: 14px;
+    color: #cce7ff;
+    margin-bottom: 6px;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    transition: 0.3s ease;
+  }
+
+  .input-group input:focus {
+    box-shadow: 0 0 10px #00e6ff;
+    background: rgba(255,255,255,0.3);
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #00e6ff, #0072ff);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #00e6ff;
+  }
+
+  footer {
+    margin-top: 15px;
+    font-size: 13px;
+    opacity: 0.8;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Animated Background -->
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+
+<!-- Form -->
+<div class="form-container">
+  <h2>Login / Register</h2>
+  <form>
+    <div class="input-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+    </div>
+
+    <div class="input-group">
+      <label for="age">Age</label>
+      <input type="number" id="age" placeholder="Enter your age" required>
+    </div>
+
+    <div class="input-group">
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" required>
+    </div>
+
+    <div class="input-group">
+      <label for="adhar">Aadhaar Card Number</label>
+      <input type="text" id="adhar" placeholder="XXXX-XXXX-XXXX" required>
+    </div>
+
+    <div class="input-group">
+      <label for="pan">PAN Card Number</label>
+      <input type="text" id="pan" placeholder="ABCDE1234F" required>
+    </div>
+
+    <div class="input-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="+91 XXXXXXXXXX" required>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <footer>© 2025 Animated Form | Designed with ❤️</footer>
+</div>
+
+</body>
+</html>
+</body>
+</html>

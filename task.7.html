@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Center Div with panels</title>
+</head>
+<body>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #222;
+    }
+
+    .container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 150px;
+      height: 150px;
+      background: teal;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .panel {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: mediumseagreen;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+    }
+
+    /* Positioning Panels Around Center */
+    .panel1 { top: 0; left: 50%; transform: translateX(-50%); }
+    .panel2 { top: 15%; right: 0; transform: translateY(-50%); }
+    .panel3 { top: 50%; right: 0; transform: translateY(-50%); }
+    .panel4 { bottom: 15%; right: 0; transform: translateY(50%); }
+    .panel5 { bottom: 0; left: 50%; transform: translateX(-50%); }
+    .panel6 { bottom: 15%; left: 0; transform: translateY(50%); }
+    .panel7 { top: 50%; left: 0; transform: translateY(-50%); }
+    .panel8 { top: 15%; left: 0; transform: translateY(-50%); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="center">CENTER DIV</div>
+    <div class="panel panel1">PANEL 1</div>
+    <div class="panel panel2">PANEL 2</div>
+    <div class="panel panel3">PANEL 3</div>
+    <div class="panel panel4">PANEL 4</div>
+    <div class="panel panel5">PANEL 5</div>
+    <div class="panel panel6">PANEL 6</div>
+    <div class="panel panel7">PANEL 7</div>
+    <div class="panel panel8">PANEL 8</div>
+  </div>
+</body>
+</html>
+  
+
+</body>
+</html>

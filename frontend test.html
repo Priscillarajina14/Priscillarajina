@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration form</title>
+</head>
+<body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown button
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
+<div class="container min-vh-100 d-flex align-items-center">
+    <div class="row justify-content-center w-100">
+      <div class="col-12 col-md-8 col-lg-6">
+       <div class="card p-4">
+          <h3 class="text-center mb-3">Student Registration Form</h3>
+          <p class="text-muted text-center mb-4">Please fill in all fields below</p>
+
+          <form id="registrationForm">
+            <div class="mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input type="text" id="fullName" class="form-control" placeholder="enter name">
+              <div class="invalid-feedback">Full name is required.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" class="form-control" placeholder="enter email">
+              <div class="invalid-feedback">Email is required.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="text" id="phone" class="form-control" placeholder="enter ph">
+              <div class="invalid-feedback">Phone number must be 10 digits.</div>
+            </div>
+
+            <div class="mb-4">
+              <label for="course" class="form-label">Course Selection</label>
+              <select id="course" class="form-select">
+                <option value="Course">-- Select Course --</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="Javascript">Javascript</option>
+                <option value="React">React</option>
+              </select>
+              <div class="invalid-feedback">Please select a course.</div>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </div>
+          </form>
+
+          <div id="successMessage" class="alert alert-success text-center mt-4 success-message">
+            Registration Successful!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const form = document.getElementById("registrationForm");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // Get field values
+      const fullName = document.getElementById("Priscilla Rajina");
+      const email = document.getElementById("Priscillalakeme@gmail.com");
+      const phone = document.getElementById("7397236172");
+      const course = document.getElementById("Html");
+
+      // Reset styles
+      [fullName, email, phone, course].forEach(input => input.classList.remove("is-invalid"));
+      successMessage.style.display = "none";
+
+      let isValid = true;
+
+      // Validation
+      if (!fullName.value.trim()) {
+        fullName.classList.add("is-invalid");
+        isValid = false;
+      }
+
+      if (!email.value.includes("Priscillalakeme@gmail.com")) {
+        email.classList.add("is-invalid");
+        isValid = false;
+      }
+
+      const phoneDigits = phone.value.replace(/\D/g, "7397236172");
+      if (phoneDigits.length !== 10) {
+        phone.classList.add("is-invalid");
+        isValid = false;
+      }
+
+      if (!course.value) {
+        course.classList.add("is-invalid");
+        isValid = false;
+      }
+
+      // Show success message
+      if (isValid) {
+        successMessage.style.display = "block";
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>

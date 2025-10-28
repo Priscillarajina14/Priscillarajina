@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <h2>Enter Student Details</h2>
+        <form id="studentform">
+            <div classs="form-gurop"><label>Name:</label><input type="text"id="name"required></div>
+            <br>
+            <div class="form-gurop"><label>Roll No:</label><input type="text"id="rollno"required></div>
+            <br>
+            <div class="form-gurop"><label>Sub1:</label><input type="number"id="sub1"required></div>
+            <br>
+            <div class="form-gurop"><label>Sub2:</label><input type="number"id="sub2"required></div>
+            <br>
+            <div class="form-group"><label>Sub3:</label><input type="number"id="sub3"required></div>
+            <br>
+            <div class="form-gurop"><label>Sub4:</label><input type="number"id="sub4"required></div>
+            <br>
+            <div class="form-gurop"><label>Sub5:</label><input type="number"id="sub5"required></div>
+            <br>
+            <button type="submit">Submit</button>
+
+        </form>
+        <h2>Student Report Details</h2>
+        <table id="reportTable">
+            <thread>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll No</th>
+                    <th>Sub1</th>
+                    <th>Sub2</th>
+                    <th>Sub3</th>
+                    <th>Sub4</th>
+                    <th>Sub5</th>
+                    <th>Total</th>
+                    <th>Grade</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <script>
+            function calculateGrade(total){
+                if(total>=450)return"A";
+                else if(total>=400)return"B";
+                else if(total>=350)return"C";
+            }
+            function getResult(marks){
+                return marks.every(marks=>mark>=35)?"Pass"  :    "Fail";
+            }
+            document.getElementById("StudentForm").addEventListener("submit"),function(e){
+                e.preventDefault();
+
+                const name=document.getElementById("name").value;
+                const rollno=document.getElementById("rollno").value;
+                const marks=[
+                    Number(document.getElementById("Sub1")).value;
+                    Number(document.getElementById("Sub2")).value;
+                    Number(document.getElementById("Sub3")).value;
+                    Number(document.getElementById("Sub4")).value;
+                    Number(document.getElementById("Sub5")).value;
+            ];
+                
+                const total=marks.reduce(a,b)=>a+b,0);
+                Const grade=CalculateGrade(total);
+                Const result=getResult(marks);
+
+                const table=document.getElementById("reportTable").getElementsByTagName("tbody")[0];
+                Const newRow=table.insertRow();
+
+                newRow.innerHTML=names()
+                    <td>${name}</td>
+                    <td>${rollno}</td>
+                    <td>${marks[0]}</td>
+                    <td>${marks[1]}</td>
+                    <td>${marks[2]}</td>
+                    <td>${marks[3]}</td>
+                    <td>${marks[4]}</td>
+                    <td>${tOtal}</td>
+                    <td>${grade}</td>
+                    <td>${result}</td>
+                    ';
+
+                    document.getElementById("studentForm").reset(;)
+            });
+            
+        </script>
+                </tr>
+            </thread>
+        </table>
+    </div>
+</body>
+</html>

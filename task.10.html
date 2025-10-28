@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body><style>
+    body {
+      background: #f4b9b0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(6, 100px);
+      grid-auto-rows: 100px;
+      gap: 5px;
+    }
+    .box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      border-radius: 4px;
+    }
+    .design { background: #1e9f9d; }
+    .webdev { background: #16695c; }
+    .motion { background: #6b2c91; }
+    .small { font-size: 12px; }
+
+    /* Different box sizes */
+    .span-2x2 { grid-column: span 2; grid-row: span 2; }
+    .span-2 { grid-column: span 2; }
+    .span-row2 { grid-row: span 2; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box design">Photoshop</div>
+    <div class="box design">InVision</div>
+    <div class="box design">UX</div>
+    <div class="box design span-2">Design</div>
+    <div class="box webdev">JavaScript</div>
+    <div class="box webdev">Layout</div>
+    <div class="box webdev">Ruby</div>
+    <div class="box webdev">CSS</div>
+    <div class="box webdev">Go</div>
+    <div class="box webdev span-2x2">Web Dev</div>
+    <div class="box webdev">PHP</div>
+    <div class="box webdev">HTML</div>
+    <div class="box webdev">Rust</div>
+    <div class="box motion span-2">Motion</div>
+    <div class="box motion">After Effects</div>
+    <div class="box motion">Maya</div>
+    <div class="box motion">Nuke</div>
+    <div class="box motion">Cinema 4D</div>
+  </div>
+</body>
+</html>
+
+    
+</body>
+</html>

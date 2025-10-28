@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Guess the color</h1>
+    <p>Click the box that matches:<span id="targetColor">rgb(???,???,???)</span></p>
+
+    <div class="color-boxes"id="boxesContainer">
+        <!--Boxes will be added here by JavaScript-->
+    </div>
+
+    <p class="message"id="message"></p>
+
+    <button onclick="startGame()">Play Again</button>
+
+    <script>
+        const boxesContainer=document.getElementById("boxesContainer");
+        const targetColorText=Document.getElementById("targetColor");
+        const message=document.getElementById('message');
+
+        let targetColor='';
+        let colors=[];
+
+        function getRandomColor(){
+            const r=Math.floor(Math.random()*256);
+            const g=Math.floor(Math.random()*256);
+            const b=Math.floor(Math.random()*256);
+            return 'rgb(${r}),${g},${b}'
+        }
+
+        function startGame(){
+            boxesContainer.innerHTML='';
+            message.textContent='';
+            colors=[];
+
+            for(let i=0;i<6;i++){
+                colors.push(getRandomColor());
+            }
+
+                                                             
+            const correctIndex=Math.floor(Math.random()*6)
+            targetColor=colors[correctIndex];
+            targetColorText.textContent=targetColor;
+
+            colors.forEach((color,index) =>{
+                const box=document.createElement('div');
+                box.classList.add('box');
+                box.classList.add('box');
+                box.style.backgroundColor=color;
+                box.addEventListener('click',()=>checkAnswer(index,correctIndex));
+                boxesContainer.appendChild(box);
+            });
+        }
+
+        function checkAnswer(clickedIndex,correctIndex){
+            if(clickedIndex===correctIndex){
+                message.textContent='correct!';
+            }else{
+                message.textContent='X Wrong!Try again.';
+            }
+        }
+        startGame();//start on load
+
+    </script>
+</body>
+</html>

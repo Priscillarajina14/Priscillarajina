@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+    background: url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+    overflow-x: hidden;
+  }
+
+  /* Animated background using overlay color */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(120deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding-top: 60px;
+    animation: fadeIn 1.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .login-box {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 35px;
+    width: 320px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.4);
+    color: white;
+    text-align: center;
+    animation: slideDown 1s ease forwards;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .login-box h2 {
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 24px;
+  }
+
+  .input-box {
+    position: relative;
+    margin: 15px 0;
+  }
+
+  .input-box input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 15px;
+    transition: 0.3s;
+  }
+
+  .input-box input:focus {
+    background: rgba(255,255,255,0.3);
+    box-shadow: 0 0 10px #00e6ff;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(90deg, #00e6ff, #0072ff);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px #00e6ff;
+  }
+
+  .error {
+    color: #ff7b7b;
+    margin-top: 10px;
+    display: none;
+  }
+
+  /* Cards section */
+  .content-section {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 60px;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    width: 280px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
+    transform: translateY(40px);
+    opacity: 0;
+    transition: all 1s ease;
+  }
+
+  .card.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+  }
+
+  .card h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #00e6ff;
+  }
+
+  .card p {
+    font-size: 14px;
+    color: #eee;
+  }
+
+  /* Floating animation for cards */
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+  }
+
+  .card img {
+    animation: float 3s ease-in-out infinite;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="login-box" id="loginBox">
+    <h2>Welcome Back</h2>
+    <div class="input-box">
+      <input type="text" id="username" placeholder="Username">
+    </div>
+    <div class="input-box">
+      <input type="password" id="password" placeholder="Password">
+    </div>
+    <button id="loginBtn">Login</button>
+    <div class="error" id="errorMsg">Please fill all fields!</div>
+  </div>
+
+  <!-- 3 animated content cards -->
+  <div class="content-section" id="contentSection">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=60" alt="">
+      <h3>About Us</h3>
+      <p>We’re a creative team focused on design, technology, and innovation.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=100&q=60" alt="">
+      <h3>Our Vision</h3>
+      <p>To build inspiring digital experiences that transform businesses.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=100&q=60" alt="">
+      <h3>Contact</h3>
+      <p>Reach us anytime for partnerships, collaborations, or inquiries.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Fade-in cards on scroll
+  const cards = document.querySelectorAll(".card");
+  window.addEventListener("scroll", () => {
+    cards.forEach(card => {
+      const top = card.getBoundingClientRect().top;
+      if (top < window.innerHeight - 100) {
+        card.classList.add("show");
+      }
+    });
+  });
+
+  // Background slow zoom animation
+  let scale = 1;
+  function animateBackground() {
+    scale += 0.0003;
+    document.body.style.backgroundSize = `${100 * scale}% ${100 * scale}%`;
+    if (scale > 1.05) scale = 1;
+    requestAnimationFrame(animateBackground);
+  }
+  animateBackground();
+
+  // Login form simple validation
+  const btn = document.getElementById("loginBtn");
+  const username = document.getElementById("username");
+  const password = document.getElementById("password");
+  const errorMsg = document.getElementById("errorMsg");
+  const loginBox = document.getElementById("loginBox");
+
+  btn.addEventListener("click", () => {
+    if (username.value === "" || password.value === "") {
+      errorMsg.style.display = "block";
+      loginBox.style.animation = "shake 0.4s";
+      setTimeout(() => loginBox.style.animation = "", 400);
+    } else {
+      errorMsg.style.display = "none";
+      btn.innerText = "Logging in...";
+      btn.style.boxShadow = "0 0 30px #00e6ff";
+      setTimeout(() => {
+        btn.innerText = "Login";
+        alert("Login successful! (Demo)");
+      }, 1200);
+    }
+  });
+</script>
+
+</body>
+</html>
+</body>
+</html>

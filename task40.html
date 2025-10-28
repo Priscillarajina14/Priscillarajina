@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(120deg, #1f1c2c, #928dab);
+    overflow: hidden;
+  }
+
+  /* Container animation setup */
+  .form-container {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
+    width: 320px;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  .form-container.show {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 1s ease;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  .input-group {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s ease;
+  }
+
+  .input-group label {
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    color: rgba(255,255,255,0.7);
+    pointer-events: none;
+    transition: 0.3s ease;
+  }
+
+  .input-group input:focus + label,
+  .input-group input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #00e6ff;
+  }
+
+  .input-group input:focus {
+    box-shadow: 0 0 8px #00e6ff;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #00e6ff, #0072ff);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00e6ff;
+  }
+
+  /* Floating glowing circles animation */
+  .bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: float 10s infinite ease-in-out;
+  }
+
+  .circle1 { width: 120px; height: 120px; background: #00e6ff; top: 10%; left: 10%; animation-delay: 0s; }
+  .circle2 { width: 200px; height: 200px; background: #0072ff; bottom: 15%; right: 15%; animation-delay: 2s; }
+  .circle3 { width: 80px; height: 80px; background: #00bfff; top: 60%; left: 70%; animation-delay: 4s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.1); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating animated background -->
+<div class="bg-circle circle1"></div>
+<div class="bg-circle circle2"></div>
+<div class="bg-circle circle3"></div>
+
+<!-- Form -->
+<div class="form-container" id="formContainer">
+  <h2>Sign In</h2>
+  <form>
+    <div class="input-group">
+      <input type="text" id="username" placeholder=" " required>
+      <label for="username">Username</label>
+    </div>
+    <div class="input-group">
+      <input type="password" id="password" placeholder=" " required>
+      <label for="password">Password</label>
+    </div>
+    <button type="submit">Login</button>
+  </form>
+</div>
+
+<script>
+  // Fade + slide form on load
+  window.addEventListener('load', () => {
+    document.getElementById('formContainer').classList.add('show');
+  });
+</script>
+
+</body>
+</html>
+    
+</body>
+</html>

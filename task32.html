@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(rgba(135,206,250,0.5), rgba(135,206,250,0.5)),
+                  url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAawI2qVSMbJxGOAoDmrvOoC1gTwOEHTtUiA&s');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .signup-card {
+      background-color: rgba(255, 255, 255, 0.95);
+      width: 400px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      text-align: center;
+      color: #00bfff;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #00bfff;
+      box-shadow: 0 0 5px #87cefa;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #00bfff;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #1e90ff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-card">
+    <h2>Signup Form</h2>
+    <form id="signupForm" onsubmit="return validateForm()">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Your Name" required>
+      <div class="error" id="nameError"></div>
+
+      <label for="dob">D.O.B:</label>
+      <input type="date" id="dob" required>
+      <div class="error" id="dobError"></div>
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" placeholder="Your Age" required>
+      <div class="error" id="ageError"></div>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter password" required>
+      <div class="error" id="passwordError"></div>
+
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" placeholder="Confirm password" required>
+      <div class="error" id="confirmPasswordError"></div>
+
+      <label for="aadhar">Aadhar Card:</label>
+      <input type="text" id="aadhar" placeholder="Enter Aadhar Number" required>
+      <div class="error" id="aadharError"></div>
+
+      <label for="pan">PAN Card:</label>
+      <input type="text" id="pan" placeholder="Enter PAN Number" required>
+      <div class="error" id="panError"></div>
+
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" placeholder="Enter Phone Number" required>
+      <div class="error" id="phoneError"></div>
+
+      <button type="submit">Signup</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      let isValid = true;
+
+      // Clear previous errors
+      document.querySelectorAll(".error").forEach(el => el.textContent = "");
+
+      const name = document.getElementById("name").value.trim();
+      const dob = document.getElementById("dob").value;
+      const age = parseInt(document.getElementById("age").value.trim());
+      const password = document.getElementById("password").value.trim();
+      const confirmPassword = document.getElementById("confirm-password").value.trim();
+      const aadhar = document.getElementById("aadhar").value.trim();
+      const pan = document.getElementById("pan").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+
+      // Name validation
+      if (name === "") {
+        document.getElementById("nameError").textContent = "Name is required";
+        isValid = false;
+      }
+
+      // DOB validation
+      if (dob === "") {
+        document.getElementById("dobError").textContent = "D.O.B is required";
+        isValid = false;
+      }
+
+      // Age validation
+      if (isNaN(age) || age < 1 || age > 120) {
+        document.getElementById("ageError").textContent = "Enter valid age";
+        isValid = false;
+      }
+
+      // Password validation
+      if (password.length < 6) {
+        document.getElementById("passwordError").textContent = "Password must be at least 6 characters";
+        isValid = false;
+      }
+
+      // Confirm password
+      if (password !== confirmPassword) {
+        document.getElementById("confirmPasswordError").textContent = "Passwords do not match";
+        isValid = false;
+      }
+
+      // Aadhar validation (exactly 12 digits)
+      if (!/^\d{12}$/.test(aadhar)) {
+        document.getElementById("aadharError").textContent = "Enter valid 12-digit Aadhar number";
+        isValid = false;
+      }
+
+      // PAN validation (5 letters + 4 digits + 1 letter)
+      if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan.toUpperCase())) {
+        document.getElementById("panError").textContent = "Enter valid PAN number";
+        isValid = false;
+      }
+
+      // Phone validation (10 digits)
+      if (!/^\d{10}$/.test(phone)) {
+        document.getElementById("phoneError").textContent = "Enter valid 10-digit phone number";
+        isValid = false;
+      }
+
+      return isValid; // If false, form won't submit
+    }
+  </script>
+
+</body>
+</html>
+    
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet"href="./formvvalidation.css">
+</head>
+<body>
+    
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card shadow p-4">
+            <h3 className="text-center text-primary mb-4">Signup Form</h3>
+
+            <form onSubmit={handleSubmit}>
+              <div className="form-group mb-3">
+                <label>Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  className="form-control"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group mb-3">
+                <label>Password:</label>
+                <input
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group mb-3">
+                <label>Confirm Password:</label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  className="form-control"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+              
+                </div>
+              <div className="form-group mb-3"></div>
+              <label>Adhar</label>
+              <input
+              type="Adhar"
+              name="invalid Adhar is required"
+              className="form-control"
+              value={formData.Adhar}
+              onchange={handleChange}
+              required
+              />
+            </div>
+           <div className="form-group mb-3">              
+            <label>Phone</label>
+              <input
+              type="Phoner"
+              name="invalid Phone is required"
+              className="form-control"
+              value={formData.Phone}
+              onchange={handleChange}
+              required
+              />
+            </div>
+            <div className="form-group mb-3">              
+            <label>Pan</label>
+              <input
+              type="Pan"
+              name="invalid Pan is required"
+              className="form-control"
+              value={formData.Pan}
+              onchange={handleChange}
+              required
+              />
+            </div>
+            <div className="form-group mb-3">              
+            <label>D.O.B</label>
+              <input
+              type="D.O.B"
+              name="invalid D.O.B is required"
+              className="form-control"
+              value={formData.Pan}
+              onchange={handleChange}
+              required
+              />
+           <div className="d-grid">
+                <button type="submit" className="btn btn-primary">
+                  Signup
+                </button>
+              </div>
+            
+            
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <title>Student Profile Form</title>
+</head>
+<body>
+
+  <h3><u>Sample Output:</u></h3>
+  <p><b>Figure 1. HTML form for user input</b></p>
+
+  <!-- Assignment Heading -->
+  <form>
+    <input type="text" value="BCS350 Assignment 3 -- Student Name" size="50">
+    <hr>
+
+    <h3>Create Your Profile</h3>
+
+    <!-- First Name -->
+    <label>First Name:</label>
+    <input type="text" name="firstname"><br><br>
+
+    <!-- Last Name -->
+    <label>Last Name:</label>
+    <input type="text" name="lastname"><br><br>
+
+    <!-- Email -->
+    <label>Email:</label>
+    <input type="email" name="email"><br><br>
+
+    <!-- Class Standing -->
+    <label>Class Standing:</label>
+    <select name="classstanding">
+      <option>Freshman</option>
+      <option>Sophomore</option>
+      <option>Junior</option>
+      <option>Senior</option>
+    </select><br><br>
+
+    <!-- School -->
+    <label>School</label><br>
+    <input type="radio" name="school" value="arts"> School of Arts & Sciences<br>
+    <input type="radio" name="school" value="business"> School of Business<br>
+    <input type="radio" name="school" value="engineering"> School of Engineering Technology<br>
+    <input type="radio" name="school" value="health"> School of Health Sciences<br><br>
+
+    <!-- Extra -->
+    <label>Extra:</label><br>
+    <input type="checkbox" name="extra" value="veteran"> Veteran<br>
+    <input type="checkbox" name="extra" value="transfer"> Transfer Student<br>
+    <input type="checkbox" name="extra" value="international"> International Student<br><br>
+
+    <!-- Textarea -->
+    <label>Program and Other Information you like to share:</label><br>
+    <textarea name="programinfo" rows="5" cols="50"></textarea><br><br>
+
+    <!-- File Upload -->
+    <label>Upload your profile picture (JPG, GIF, PNG or TIF File):</label><br>
+    <input type="file" name="profilepic"><br><br>
+
+    <!-- Submit & Reset -->
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+
+  </form>
+    
+</body>
+</html>
