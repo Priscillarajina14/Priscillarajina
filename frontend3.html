@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <title>Personal Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background: #f5f5f5; color: #222; }
+
+
+/* NAVBAR */
+header { width: 100%; padding: 20px 60px; position: fixed; top: 0; background: #111; color: #fff; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+header h1 { font-size: 26px; }
+nav ul { display: flex; gap: 30px; list-style: none; }
+nav ul li a { color: #fff; text-decoration: none; font-size: 16px; transition: 0.3s; }
+nav ul li a:hover { color: #00aaff; }
+
+
+/* HERO SECTION */
+.hero { padding-top: 120px; height: 85vh; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; }
+.hero-text { max-width: 50%; }
+.hero-text h2 { font-size: 48px; font-weight: 700; }
+.hero-text p { margin-top: 15px; font-size: 18px; line-height: 1.6; }
+.hero img { width: 380px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+
+
+/* SECTION */
+.section { padding: 70px 60px; text-align: center; }
+.section h2 { font-size: 36px; margin-bottom: 20px; }
+.section p { max-width: 800px; margin: auto; font-size: 18px; }
+
+
+/* SKILLS */
+.skills { display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; margin-top: 40px; }
+.skill-box { background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.skill-box h3 { margin-bottom: 10px; }
+
+
+/* PROJECTS */
+.projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+.project-card { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; }
+.project-card:hover { transform: translateY(-8px); }
+
+
+/* FOOTER */
+footer { padding: 30px; background: #111; color: #fff; text-align: center; margin-top: 50px; }
+</style>
+</head>
+<body>
+<!-- NAVBAR -->
+<header>
+<h1>My Portfolio</h1>
+<nav>
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+</header>
+
+
+<!-- HERO SECTION -->
+<section class="hero" id="home">
+<div class="hero-text">
+<h2>Hello, I'm a Front-End Developer</h2>
+<p>I create beautiful, modern, and responsive websites using HTML, CSS, and JavaScript.</p>
+</div>
+<img src="https://scontent.fmaa6-1.fna.fbcdn.net/v/t39.30808-6/590603258_4048572028739203_2888039934748257019_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=IaEgpi4txoIQ7kNvwFSfBz4&_nc_oc=AdmGpWuWv1zPSxEIAGxhxC-tBUQt4RRf5p0yAlyh-SjYzqJVvTip3uvuOHPMXjknuuA&_nc_zt=23&_nc_ht=scontent.fmaa6-1.fna&_nc_gid=Q-9phD-ovLrwGjpDuvPo0Q&oh=00_Afi6CyRFb4Gm3uBGweFGKnTYmjF_xJm7TPMY5M125TQByw&oe=692F0502" alt="Profile Image" />
+</section>
+
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+<h2>My Skills</h2>
+<div class="skills">
+<div class="skill-box">
+<h3>HTML</h3>
+<h3>CSS</h3>
+<H3>JavaScript</H3>
+<H3>Bootstrap</H3>
+<h3>React</h3>
+<h3>Front end</h3>
+<h3>Backend</h3>
+</html>
+</body>
+</html>
+<!-- PROJECTS -->
+<section class="section" id="projects">
+<h2>Projects</h2>
+<div class="projects">
+<div class="project-card">
+<h3>Portfolio Website</h3>
+<p>A modern personal portfolio created using HTML, CSS & JS.</p>
+</div>
+<div class="project-card">
+<h3>Weather App</h3>
+<p>Fetches real-time weather data using API.</p>
+</div>
+<div class="project-card">
+<h3>Calculator</h3>
+<p>A simple functional calculator built with JavaScript.</p>
+</div>
+</div>
+</section>
+
+
+<!-- FOOTER -->
+<footer id="contact">
+<p>© 2025 My Portfolio | All Rights Reserved</p>
+</footer>
+</body>
+</html>
