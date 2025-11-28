@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Socially — Social Media Dashboard (Frontend)</title>
+  <style>
+    :root{
+      --bg: #f3f6fb;
+      --card: #ffffff;
+      --muted:#6b7280;
+      --accent: #4f46e5;
+      --accent-2:#06b6d4;
+      --success:#10b981;
+      --glass: rgba(255,255,255,0.7);
+      --shadow: 0 6px 18px rgba(15,23,42,0.08);
+      --radius: 12px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color-scheme: light;
+    }
+    [data-theme="dark"]{
+      --bg:#0b1020;
+      --card:#0f1724;
+      --muted:#9ca3af;
+      --accent:#7c3aed;
+      --accent-2:#06b6d4;
+      --glass: rgba(255,255,255,0.03);
+      --shadow: 0 6px 22px rgba(0,0,0,0.6);
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);}
+    .app{display:grid;grid-template-columns:260px 1fr 340px;gap:24px;padding:28px;max-width:1200px;margin:24px auto;}
+
+    /* SIDEBAR */
+    .sidebar{background:linear-gradient(180deg,var(--glass),transparent);backdrop-filter: blur(6px);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow);height:calc(100vh - 96px);position:sticky;top:24px}
+    .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    h1.appname{font-size:18px;margin:0}
+    nav.menu{margin-top:12px}
+    nav.menu a{display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;color:var(--muted);text-decoration:none;margin-bottom:6px}
+    nav.menu a.active, nav.menu a:hover{background:rgba(99,102,241,0.08);color:var(--accent);}
+
+    .metric{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+    .metric .mrow{display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--card);border-radius:10px;box-shadow:var(--shadow)}
+    .mrow small{color:var(--muted)}
+
+    /* MAIN */
+    .main{min-height:600px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+    .search{flex:1;display:flex;gap:10px;align-items:center;background:var(--card);padding:10px;border-radius:999px;box-shadow:var(--shadow)}
+    .search input{border:0;outline:none;background:transparent;width:100%;font-size:14px}
+    .actions{display:flex;gap:8px;align-items:center}
+    .btn{padding:8px 12px;border-radius:8px;border:0;background:var(--accent);color:white;cursor:pointer;box-shadow:var(--shadow)}
+    .icon-btn{background:transparent;border-radius:8px;padding:8px;border:1px solid rgba(0,0,0,0.05);cursor:pointer}
+
+    /* Composer */
+    .composer{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow);margin-bottom:18px}
+    .composer textarea{width:100%;min-height:70px;border:0;resize:none;font-size:15px;background:transparent;outline:none}
+    .composer .row{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+
+    /* FEED */
+    .feed{display:flex;flex-direction:column;gap:14px}
+    .post{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow)}
+    .post .meta{display:flex;gap:12px;align-items:center}
+    .avatar{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#60a5fa,#7c3aed);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    .post .content{margin-top:10px;font-size:15px;color:var(--muted)}
+    .post .img{width:100%;border-radius:10px;margin-top:10px;display:block}
+    .post .reactions{display:flex;gap:14px;align-items:center;margin-top:10px;color:var(--muted)}
+    .reaction-btn{display:flex;gap:8px;align-items:center;padding:8px 10px;border-radius:8px;background:transparent;border:1px solid rgba(0,0,0,0.03);cursor:pointer}
+    .reaction-btn.liked{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border:none}
+
+    /* RIGHT PANEL */
+    .right{position:sticky;top:24px;height:calc(100vh - 96px);overflow:auto;padding:18px;background:linear-gradient(180deg,var(--glass),transparent);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card{background:var(--card);padding:14px;border-radius:10px}
+    .stats{display:flex;gap:12px;justify-content:space-between;margin-bottom:12px}
+    .stat{flex:1;padding:12px;border-radius:10px;text-align:center}
+    .donut{width:140px;height:140px;border-radius:50%;display:inline-grid;place-items:center;font-weight:700}
+
+    /* simple bar chart */
+    .bars{display:flex;gap:8px;align-items:end;height:120px;padding:12px;background:transparent}
+    .bar{flex:1;border-radius:8px;background:linear-gradient(180deg,var(--accent-2),var(--accent));display:flex;align-items:end;justify-content:center;color:white;padding-bottom:6px;font-size:12px}
+
+    footer.note{text-align:center;color:var(--muted);margin-top:18px;font-size:13px}
+
+    /* responsive */
+    @media(max-width:1024px){.app{grid-template-columns:1fr;max-width:920px;padding:18px}.sidebar{position:relative;height:auto}.right{order:3;height:auto;margin-top:10px}.main{order:2}.appname{display:none}}
+  </style>
+</head>
+<body data-theme="light">
+  <div style="max-width:1200px;margin:14px auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center">
+    <div style="display:flex;gap:12px;align-items:center">
+      <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700">S</div>
+      <div>
+        <div style="font-weight:700">Socially</div>
+        <div style="font-size:12px;color:var(--muted)">Advanced dashboard demo</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button id="themeToggle" class="icon-btn" title="Toggle dark mode">🌓</button>
+      <button id="collapseBtn" class="icon-btn" title="Toggle sidebar">☰</button>
+    </div>
+  </div>
+
+  <div class="app" id="app">
+
+    <!-- LEFT: Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="logo">So</div>
+        <div>
+          <h1 class="appname">Socially</h1>
+          <small style="color:var(--muted)">Analytics & Feed</small>
+        </div>
+      </div>
+
+      <nav class="menu">
+        <a href="#" class="active">🏠 Home</a>
+        <a href="#">📊 Analytics</a>
+        <a href="#">💬 Messages</a>
+        <a href="#">📁 Campaigns</a>
+        <a href="#">⚙️ Settings</a>
+      </nav>
+
+      <div class="metric">
+        <div class="mrow">
+          <div>
+            <div style="font-weight:700">12.4k</div>
+            <small>Followers</small>
+          </div>
+          <div style="text-align:right;color:var(--success)">+2.1%</div>
+        </div>
+        <div class="mrow">
+          <div>
+            <div style="font-weight:700">3.8k</div>
+            <small>Engagements</small>
+          </div>
+          <div style="text-align:right;color:var(--accent)">+5.3%</div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px">
+        <small style="color:var(--muted)">Quick Actions</small>
+        <div style="display:flex;gap:10px;margin-top:8px">
+          <button class="btn" onclick="focusComposer()">New Post</button>
+          <button class="icon-btn" title="Export">⬇</button>
+        </div>
+      </div>
+      <div style="margin-top:12px;color:var(--muted);font-size:13px">Version 1.0 — Frontend demo</div>
+    </aside>
+
+    <!-- CENTER: Main feed -->
+    <main class="main">
+      <div class="topbar">
+        <div class="search">
+          🔎 <input id="searchInput" placeholder="Search posts, users, hashtags..." />
+        </div>
+        <div class="actions">
+          <select id="filterSelect" style="padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)">
+            <option value="all">All posts</option>
+            <option value="images">Images</option>
+            <option value="text">Text-only</option>
+          </select>
+          <button class="btn" onclick="composeSample()">Publish</button>
+        </div>
+      </div>
+
+      <section class="composer card">
+        <textarea id="composer" placeholder="What's happening? (try: 'Design sprint today')"></textarea>
+        <div class="row" style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+          <div style="display:flex;gap:8px">
+            <input id="imageUrl" placeholder="Optional image URL" style="padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);width:260px" />
+            <small style="color:var(--muted);align-self:center">Max 2MB (demo)</small>
+          </div>
+          <div>
+            <button class="btn" onclick="publishPost()">Post</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="feed" id="feed">
+        <!-- posts injected by JS -->
+      </section>
+
+      <footer class="note">Template built with vanilla HTML/CSS/JS — customize freely</footer>
+    </main>
+
+    <!-- RIGHT: Analytics -->
+    <aside class="right">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <h3 style="margin:0">Audience Overview</h3>
+        <small style="color:var(--muted)">Last 7 days</small>
+      </div>
+
+      <div class="card" style="margin-bottom:12px;text-align:center">
+        <div style="display:flex;justify-content:center;margin-bottom:8px">
+          <div class="donut" id="donut">0%</div>
+        </div>
+        <div style="color:var(--muted);font-size:13px">Audience growth</div>
+      </div>
+
+      <div class="card" style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <strong>Top Posts</strong>
+          <small style="color:var(--muted)">Engagements</small>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between"><span>#DesignTips</span><strong>1.2k</strong></div>
+          <div style="display:flex;justify-content:space-between"><span>#TeamWork</span><strong>980</strong></div>
+          <div style="display:flex;justify-content:space-between"><span>#Product</span><strong>720</strong></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <strong>Session Duration</strong>
+          <small style="color:var(--muted)">avg</small>
+        </div>
+        <div style="font-size:22px;font-weight:700">3m 24s</div>
+      </div>
+
+      <div class="card">
+        <strong style="display:block;margin-bottom:8px">Weekly Activity</strong>
+        <div class="bars" id="bars">
+          <!-- bars injected -->
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <script>
+    // --- Sample data ---
+    const samplePosts = [
+      {id:1,author:'Aisha',avatar:'A',time:'2h',text:'Design sprint today — rapid prototypes done! #DesignTips',img:'https://picsum.photos/id/1011/900/500',likes:120,comments:12,images:true},
+      {id:2,author:'Ravi',avatar:'R',time:'4h',text:'Deployed a small performance improvement — 30% faster! 🚀',img:'',likes:78,comments:6,images:false},
+      {id:3,author:'Meera',avatar:'M',time:'1d',text:'A photo from our team offsite — great bonding time.',img:'https://picsum.photos/id/1018/900/500',likes:220,comments:31,images:true},
+    ];
+
+    // --- Render functions ---
+    const feedEl = document.getElementById('feed');
+    function renderPost(p){
+      const div = document.createElement('div'); div.className='post';
+      div.innerHTML = `
+        <div class="meta">
+          <div class="avatar">${p.avatar}</div>
+          <div style="flex:1">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div><strong>${p.author}</strong> <small style="color:var(--muted);font-size:13px">· ${p.time}</small></div>
+              <div style="color:var(--muted);font-size:12px">...</div>
+            </div>
+            <div class="content">${escapeHtml(p.text)}</div>
+          </div>
+        </div>
+      `;
+      if(p.img){
+        const img = document.createElement('img'); img.className='img'; img.src=p.img; img.alt='post image'; div.appendChild(img);
+      }
+      const reactions = document.createElement('div'); reactions.className='reactions';
+      reactions.innerHTML = `
+        <button class="reaction-btn" data-id="${p.id}" onclick="toggleLike(event,this,${p.id})">👍 <span class="count">${p.likes}</span></button>
+        <div style="color:var(--muted)">💬 ${p.comments}</div>
+        <div style="color:var(--muted)">🔁 Share</div>
+      `;
+      div.appendChild(reactions);
+      return div;
+    }
+
+    function renderFeed(list){
+      feedEl.innerHTML='';
+      list.forEach(p => feedEl.appendChild(renderPost(p)));
+    }
+
+    // initial render
+    renderFeed(samplePosts);
+
+    // -- like button --
+    function toggleLike(e,btn,id){
+      e.stopPropagation();
+      const span = btn.querySelector('.count');
+      let val = parseInt(span.textContent,10);
+      if(btn.classList.contains('liked')){ btn.classList.remove('liked'); val--; }
+      else { btn.classList.add('liked'); val++; }
+      span.textContent = val;
+      updateDonut();
+      updateBars();
+    }
+
+    // --- composer ---
+    function publishPost(){
+      const text = document.getElementById('composer').value.trim();
+      const img = document.getElementById('imageUrl').value.trim();
+      if(!text && !img){ alert('Write something or add an image URL.'); return; }
+      const newP = {id:Date.now(),author:'You',avatar:'Y',time:'now',text:text,img:img,likes:0,comments:0,images:!!img};
+      samplePosts.unshift(newP);
+      renderFeed(samplePosts);
+      document.getElementById('composer').value=''; document.getElementById('imageUrl').value='';
+      updateDonut(); updateBars();
+    }
+    function composeSample(){ document.getElementById('composer').value='New campaign live — check it out! #Product'; document.getElementById('imageUrl').value='https://picsum.photos/900/500'; }
+    function focusComposer(){ window.scrollTo({top:200,behavior:'smooth'}); document.getElementById('composer').focus(); }
+
+    // --- search & filter ---
+    document.getElementById('searchInput').addEventListener('input',(e)=>{
+      const q=e.target.value.toLowerCase();
+      const filtered = samplePosts.filter(p=> (p.text||'').toLowerCase().includes(q) || p.author.toLowerCase().includes(q));
+      renderFeed(filtered);
+    });
+    document.getElementById('filterSelect').addEventListener('change',(e)=>{
+      const v=e.target.value;
+      if(v==='all') renderFeed(samplePosts);
+      else if(v==='images') renderFeed(samplePosts.filter(p=>p.images));
+      else renderFeed(samplePosts.filter(p=>!p.images));
+    });
+
+    // --- simple analytics (donut + bars) ---
+    function updateDonut(){
+      const totalLikes = samplePosts.reduce((s,p)=>s+p.likes,0);
+      const top = Math.max(...samplePosts.map(p=>p.likes));
+      const share = totalLikes>0?Math.round((top/totalLikes)*100):0;
+      const donut = document.getElementById('donut');
+      donut.style.background = `conic-gradient(var(--accent) ${share}%, rgba(0,0,0,0.06) ${share}% 100%)`;
+      donut.textContent = share + '%';
+    }
+    function updateBars(){
+      const barsEl = document.getElementById('bars'); barsEl.innerHTML='';
+      const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+      // generate totals per day from posts' likes timestamp (simulated)
+      const values = days.map((d,i)=>Math.max(30, Math.round(Math.random()*180)));
+      const max = Math.max(...values);
+      values.forEach((v,i)=>{
+        const b = document.createElement('div'); b.className='bar'; b.style.height = (v/max*100)+'%'; b.textContent = v; barsEl.appendChild(b);
+      })
+    }
+    updateDonut(); updateBars();
+
+    // --- util ---
+    function escapeHtml(str){ return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    // dark mode toggle
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', ()=>{
+      const root = document.documentElement;
+      const cur = document.body.getAttribute('data-theme') || 'light';
+      const next = cur==='light' ? 'dark' : 'light';
+      document.body.setAttribute('data-theme', next);
+    });
+
+    // collapse sidebar
+    document.getElementById('collapseBtn').addEventListener('click',()=>{
+      const sb = document.getElementById('sidebar'); sb.style.display = sb.style.display==='none'?'block':'none';
+    });
+
+    // small keyboard shortcut: "n" to focus composer
+    document.addEventListener('keydown',(e)=>{ if(e.key.toLowerCase()==='n'){ focusComposer(); } });
+
+  </script>
+</body>
+</html>
